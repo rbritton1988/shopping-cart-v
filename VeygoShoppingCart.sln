@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeygoShoppingCart.API", "VeygoShoppingCart.API\VeygoShoppingCart.API.csproj", "{1D7829FB-C02D-49D5-B4DB-823B4F97BB84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeygoShoppingCart.Domain", "VeygoShoppingCart.Domain\VeygoShoppingCart.Domain.csproj", "{85C55C61-C621-4324-82F9-7655019DEE17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeygoShoppingCart.Tests", "VeygoShoppingCart.Tests\VeygoShoppingCart.Tests.csproj", "{BCA7C2F3-C09E-44F6-8582-54901D86BC6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D7829FB-C02D-49D5-B4DB-823B4F97BB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D7829FB-C02D-49D5-B4DB-823B4F97BB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D7829FB-C02D-49D5-B4DB-823B4F97BB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D7829FB-C02D-49D5-B4DB-823B4F97BB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C55C61-C621-4324-82F9-7655019DEE17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C55C61-C621-4324-82F9-7655019DEE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C55C61-C621-4324-82F9-7655019DEE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C55C61-C621-4324-82F9-7655019DEE17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA7C2F3-C09E-44F6-8582-54901D86BC6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA7C2F3-C09E-44F6-8582-54901D86BC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA7C2F3-C09E-44F6-8582-54901D86BC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA7C2F3-C09E-44F6-8582-54901D86BC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5C3EE05-F553-44B4-ADB3-5E1DBAB1372E}
+	EndGlobalSection
+EndGlobal
