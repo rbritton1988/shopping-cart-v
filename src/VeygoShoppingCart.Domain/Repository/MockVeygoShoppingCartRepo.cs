@@ -27,7 +27,7 @@ namespace VeygoShoppingCart.Domain.Repository
             throw new NotImplementedException();
         }
 
-        public int CreateShoppingCart()
+        public ShoppingCart CreateShoppingCart()
         {
             throw new NotImplementedException();
         }
@@ -87,6 +87,46 @@ namespace VeygoShoppingCart.Domain.Repository
         }
 
         public IEnumerable<Discount> GetAllDiscounts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DiscountExistsInShoppingCart(int cart_id, string discount_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ShoppingCart GetShoppingCartById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Item GetItemById(int item_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Discount GetDiscountByCode(string discount_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CartItem> GetCartItemsByCartId(int cart_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CartItem GetCartItemById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CartDiscount> GetCartDiscountsByCartId(int cart_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CartDiscount GetCartDiscountById(int id)
         {
             throw new NotImplementedException();
         }

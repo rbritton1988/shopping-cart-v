@@ -1,6 +1,6 @@
 ﻿namespace VeygoShoppingCart.API.DTOs
 {
-    public class DiscountDTO
+    public class DiscountsCreateDTO
     {
         public string Code { get; set; }
         public double Percentage { get; set; }

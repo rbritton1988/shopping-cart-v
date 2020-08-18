@@ -5,8 +5,8 @@ namespace VeygoShoppingCart.API.DTOs
 {
     public class ShoppingCartDTO
     {
-        public List<ItemDTO> Items { get; set; }
-        public List<DiscountDTO> Discounts { get; set; }
-        public double TotalPrice { get; set; }
+        public IEnumerable<CartItemsCreateDTO> Items { get; set; }
+        public IEnumerable<DiscountsCreateDTO> Discounts { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }
