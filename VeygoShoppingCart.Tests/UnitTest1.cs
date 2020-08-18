@@ -42,5 +42,6 @@ namespace VeygoShoppingCart.Tests
         {
             Assert.Pass();
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using VeygoShoppingCart.Domain.Models;
 
 
@@ -14,12 +15,14 @@ namespace VeygoShoppingCart.Domain
 
         public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SetupTables(modelBuilder);
             SetupEntityRelationships(modelBuilder);
+            SetupEntityConstraints(modelBuilder);
             SeedDatabase(modelBuilder);
         }
 
@@ -28,14 +31,12 @@ namespace VeygoShoppingCart.Domain
             modelBuilder.Entity<Item>().ToTable("Items");
             modelBuilder.Entity<Discount>().ToTable("Discounts");
             modelBuilder.Entity<ShoppingCart>().ToTable("ShoppingCarts");
-            modelBuilder.Entity<CartDiscount>().ToTable("ShoppingCartDiscounts");
-            modelBuilder.Entity<CartItem>().ToTable("CartItems");
+            modelBuilder.Entity<CartDiscount>().ToTable("CartDiscounts").HasKey(cd => new { cd.ShoppingCartId, cd.DiscountId });
+            modelBuilder.Entity<CartItem>().ToTable("CartItems").HasKey(ci => new { ci.ShoppingCartId, ci.ItemId });
         }
 
         private void SetupEntityRelationships(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<CartItem>()
-                .HasKey(ci => new { ci.ShoppingCartId, ci.ItemId });
+        {                
             modelBuilder.Entity<CartItem>()
                 .HasOne(ci => ci.ShoppingCart)
                 .WithMany(i => i.CartItems)
@@ -44,10 +45,7 @@ namespace VeygoShoppingCart.Domain
                 .HasOne(i => i.Item)
                 .WithMany(ci => ci.CartItems)
                 .HasForeignKey(i => i.ItemId);
-
-
-            modelBuilder.Entity<CartDiscount>()
-                .HasKey(cd => new { cd.ShoppingCartId, cd.DiscountId });
+                
             modelBuilder.Entity<CartDiscount>()
                 .HasOne(cd => cd.ShoppingCart)
                 .WithMany(d => d.CartDiscounts)
@@ -56,6 +54,54 @@ namespace VeygoShoppingCart.Domain
                 .HasOne(d => d.Discount)
                 .WithMany(cd => cd.CartDiscounts)
                 .HasForeignKey(d => d.DiscountId);
+        }
+
+        private void SetupEntityConstraints(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CartItem>()
+                .Property(ci => ci.Quantity)
+                .IsRequired();
+
+            modelBuilder.Entity<ShoppingCart>()
+                .Property(sc => sc.Complete)
+                .HasDefaultValue(false)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<ShoppingCart>()
+                .Property(sc => sc.TotalPrice)
+                .HasDefaultValue(0.00M)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Name)
+                .IsRequired();
+
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Description)
+                .HasMaxLength(500)
+                .IsRequired();
+
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Price)
+                .IsRequired();
+
+            modelBuilder.Entity<Discount>()
+                .Property(d => d.Code)
+                .HasMaxLength(15);
+
+            modelBuilder.Entity<Discount>()
+                .HasIndex(d => d.Code)
+                .IsUnique();
+
+            modelBuilder.Entity<Discount>()
+                .Property(d => d.Description)
+                .HasMaxLength(500)
+                .IsRequired();
+
+            modelBuilder.Entity<Discount>()
+                .Property(d => d.Percentage)                
+                .IsRequired();
         }
 
         private void SeedDatabase(ModelBuilder modelBuilder)

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200818070323_initial-migration.cs" />
+    <Compile Remove="Migrations\20200818070323_initial-migration.Designer.cs" />
+    <Compile Remove="Migrations\20200818070917_increase-description-capacities.cs" />
+    <Compile Remove="Migrations\20200818070917_increase-description-capacities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>

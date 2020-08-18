@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VeygoShoppingCart.Domain.Models;
 
 namespace VeygoShoppingCart.Domain.Helpers
