@@ -22,7 +22,11 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ItemDTO>> GetAllItems()
         {
-            return Ok(new Item());
+            var items = _repo.GetAllItems();
+
+            // todo: Map Domain items to DTO - Automapper
+
+            return Ok(items);
         }
     }
 }

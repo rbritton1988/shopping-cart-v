@@ -21,9 +21,9 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<DiscountDTO>> GetAllDiscounts()
         {
-            var discounts = _repo.GetDiscounts();
+            var discounts = _repo.GetAllDiscounts();
 
-            // map domain discount to dto then send
+            // todo: map domain discount to dto - Automapper
 
             return Ok(discounts);
         }

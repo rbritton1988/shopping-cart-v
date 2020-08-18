@@ -21,7 +21,8 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpPost]
         public ActionResult<ShoppingCartDTO> CreateShoppingCart()
         {
-            return Ok(new ShoppingCartDTO { TotalPrice = 0 });
+            int cart_id = _repo.CreateShoppingCart();
+            return Ok(cart_id);
         }
 
         [HttpPut("{cart_id}/items/{item_id}/quantity/{qty}")]

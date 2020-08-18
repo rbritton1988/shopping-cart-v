@@ -32,10 +32,6 @@ namespace VeygoShoppingCart.Domain.Repository
             throw new NotImplementedException();
         }
 
-        public Item GetAllItems()
-        {
-            throw new NotImplementedException();
-        }
 
         public Discount GetDiscountById(int id)
         {
@@ -43,15 +39,6 @@ namespace VeygoShoppingCart.Domain.Repository
             return discount;
         }
 
-        public IEnumerable<Discount> GetDiscounts()
-        {
-            return _discounts;
-        }
-
-        public IEnumerable<Item> GetItems()
-        {
-            throw new NotImplementedException();
-        }
 
         public ShoppingCart RemoveShoppingCartDiscount(int cart_id, string code)
         {
@@ -75,12 +62,12 @@ namespace VeygoShoppingCart.Domain.Repository
 
         private void CreateShoppingCartItems()
         {
-
+            throw new NotImplementedException();
         }
 
         private void CreateShoppingCartDiscounts()
         {
-
+            throw new NotImplementedException();
         }
 
 
@@ -92,6 +79,16 @@ namespace VeygoShoppingCart.Domain.Repository
                 new ShoppingCart{ Id = 2, TotalPrice = 0.00M, Complete = false },
                 new ShoppingCart{ Id = 3, TotalPrice = 0.00M, Complete = false }
             };
+        }
+
+        public IEnumerable<Item> GetAllItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Discount> GetAllDiscounts()
+        {
+            throw new NotImplementedException();
         }
     }
 }

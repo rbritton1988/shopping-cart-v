@@ -28,7 +28,8 @@ namespace VeygoShoppingCart.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IVeygoShoppingCartRepo, MockVeygoShoppingCartRepo>();
+            //services.AddScoped<IVeygoShoppingCartRepo, MockVeygoShoppingCartRepo>();
+            services.AddScoped<IVeygoShoppingCartRepo, VeygoShoppingCartRepo>();
 
             services.AddCors(options =>
             {
