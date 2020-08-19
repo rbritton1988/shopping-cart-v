@@ -25,10 +25,15 @@ namespace VeygoShoppingCart.Domain.Repository
             }
             else
             {
+                var shopping_cart = _context.ShoppingCarts.FirstOrDefault(sc => sc.Id == cart_id);
+                var item = _context.Items.FirstOrDefault(i => i.Id == item_id);
+
                 var new_cart_item = new CartItem
                 {
                     ItemId = item_id,
+                    Item = item,
                     ShoppingCartId = cart_id,
+                    ShoppingCart = shopping_cart,
                     Quantity = 1
                 };
 

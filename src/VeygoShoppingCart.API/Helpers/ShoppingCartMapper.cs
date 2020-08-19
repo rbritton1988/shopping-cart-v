@@ -16,15 +16,9 @@ namespace VeygoShoppingCart.API.Helpers
             mapped_cart.Discounts = new List<DiscountDTO>() { };
             mapped_cart.Items = new List<ItemDTO>() { };
 
-            if (cart.CartDiscounts.Count() > 0)
-            {
-                mapped_cart.Discounts = mapper.Map<ICollection<DiscountDTO>>(cart.CartDiscounts);
-            }
+            mapped_cart.Discounts = mapper.Map<ICollection<DiscountDTO>>(cart.CartDiscounts);
+            mapped_cart.Items = mapper.Map<ICollection<ItemDTO>>(cart.CartItems);
 
-            if (cart.CartItems.Count() > 0)
-            {
-                mapped_cart.Items = mapper.Map<ICollection<ItemDTO>>(cart.CartItems);
-            }
 
             for (int i = 0; i < mapped_cart.Items.Count(); i++)
             {
