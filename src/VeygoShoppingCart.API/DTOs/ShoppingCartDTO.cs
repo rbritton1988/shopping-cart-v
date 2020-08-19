@@ -3,10 +3,13 @@
 
 namespace VeygoShoppingCart.API.DTOs
 {
+
     public class ShoppingCartDTO
     {
-        public List<ItemDTO> Items { get; set; }
-        public List<DiscountDTO> Discounts { get; set; }
-        public double TotalPrice { get; set; }
+        public int Id { get; set; }
+        public int CartId { get; set; }
+        public ICollection<CartItemDTO> Items { get; set; }
+        public ICollection<CartDiscountDTO> Discounts { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VeygoShoppingCart.API.DTOs;
 using VeygoShoppingCart.Domain.Repository;
@@ -12,20 +13,22 @@ namespace VeygoShoppingCart.API.Controllers
     public class DiscountsController : ControllerBase
     {
         private readonly IVeygoShoppingCartRepo _repo;
+        private readonly IMapper _mapper;
 
-        public DiscountsController(IVeygoShoppingCartRepo repo)
+        public DiscountsController(IVeygoShoppingCartRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<DiscountDTO>> GetAllDiscounts()
         {
-            var discounts = _repo.GetDiscounts();
+            var discounts = _repo.GetAllDiscounts();
 
-            // map domain discount to dto then send
+            var mapped_discounts = _mapper.Map<IEnumerable<DiscountDTO>>(discounts);
 
-            return Ok(discounts);
+            return Ok(mapped_discounts);
         }
     }
 }
