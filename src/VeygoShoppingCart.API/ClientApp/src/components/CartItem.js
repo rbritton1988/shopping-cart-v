@@ -14,7 +14,7 @@ const CartItem = (props) => {
             <div className="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                className="btn btn-danger"
+                className="btn btn-danger mr-1"
                 onClick={props.itemQtyDecreased}
               >
                 -
@@ -33,7 +33,7 @@ const CartItem = (props) => {
 
         <div className="col-3">
           <div className="card-body">
-            <p>£{props.item.price}</p>
+            <p className="d-block text-right"><b>£{props.item.price}</b></p>
           </div>
         </div>
       </div>

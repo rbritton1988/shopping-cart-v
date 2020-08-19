@@ -4,7 +4,7 @@ import ShoppingCart from "./containers/ShoppingCart";
 function App() {
   return (
     <div className="container-fluid">
-      <ShoppingCart />
+        <ShoppingCart />
     </div>
   );
 }
