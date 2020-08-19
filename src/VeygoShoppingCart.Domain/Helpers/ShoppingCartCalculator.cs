@@ -16,7 +16,7 @@ namespace VeygoShoppingCart.Domain.Helpers
 
             cartDiscounts.ForEach(cartDiscount =>
             {
-                total *= (decimal)cartDiscount.Discount.Percentage;
+                total -= total * (decimal)cartDiscount.Discount.Percentage;
             });
 
             return total;

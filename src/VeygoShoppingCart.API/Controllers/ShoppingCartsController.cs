@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VeygoShoppingCart.API.DTOs;
 using VeygoShoppingCart.API.Helpers;
-using VeygoShoppingCart.Domain.Models;
 using VeygoShoppingCart.Domain.Repository;
 
 
@@ -28,6 +24,8 @@ namespace VeygoShoppingCart.API.Controllers
         public ActionResult<ShoppingCartDTO> GetShoppingCart(int cart_id)
         {
             var cart = _repo.GetShoppingCartById(cart_id);
+            _repo.UpdateShoppingCartTotalPrice(cart_id);
+
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
             return Ok(mapped_cart);
         }
@@ -44,6 +42,7 @@ namespace VeygoShoppingCart.API.Controllers
         public ActionResult<ShoppingCartDTO> AddItemToShoppingCart(int cart_id, int item_id)
         {
             _repo.IncreaseShoppingCartItemQuantity(cart_id, item_id);
+            _repo.UpdateShoppingCartTotalPrice(cart_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
@@ -55,6 +54,7 @@ namespace VeygoShoppingCart.API.Controllers
         public ActionResult<ShoppingCartDTO> RemoveItemFromShoppingCart(int cart_id, int item_id)
         {
             _repo.ReduceShoppingCartItemQuantity(cart_id, item_id);
+            _repo.UpdateShoppingCartTotalPrice(cart_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
@@ -66,6 +66,7 @@ namespace VeygoShoppingCart.API.Controllers
         public ActionResult<ShoppingCartDTO> ClearShoppingCartItems(int cart_id)
         {
             _repo.ClearShoppingCartItems(cart_id);
+            _repo.UpdateShoppingCartTotalPrice(cart_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
@@ -76,8 +77,21 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpPost("{cart_id}/discounts/{discount_code}")]
         public ActionResult<ShoppingCartDTO> AddDiscountToShoppingCart(int cart_id, string discount_code)
         {
-            var cart = _repo.AddShoppingCartDiscount(cart_id, discount_code);
-            var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
+            var shoppingCart = _repo.GetShoppingCartById(cart_id);
+            var discount = _repo.GetDiscountByCode(discount_code);
+
+            bool discount_applied = _repo.DiscountExistsInShoppingCart(cart_id, discount_code);
+            
+            if (discount_applied)
+            {
+                return BadRequest();
+            }
+
+            _repo.AddShoppingCartDiscount(shoppingCart, discount);
+            _repo.UpdateShoppingCartTotalPrice(cart_id);
+
+            var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(shoppingCart, _mapper);
+
             return Ok(mapped_cart);
         }
 

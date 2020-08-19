@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using VeygoShoppingCart.Domain.Helpers;
 using VeygoShoppingCart.Domain.Models;
 
 namespace VeygoShoppingCart.Domain.Repository
@@ -61,27 +61,18 @@ namespace VeygoShoppingCart.Domain.Repository
             Save();
         }
 
-        public ShoppingCart AddShoppingCartDiscount(int cart_id, string code)
+        public void AddShoppingCartDiscount(ShoppingCart cart, Discount discount)
         {
-            bool discount_exists = DiscountExistsInShoppingCart(cart_id, code);
-            if (discount_exists)
-            {
-                throw new ArgumentException("Discount already applied to that cart");
-            }
-
-            var discount = GetDiscountByCode(code);
-            var shoppingCart = GetShoppingCartById(cart_id);
-
             var cart_discount = new CartDiscount { 
                 DiscountId = discount.Id, 
-                ShoppingCartId = cart_id,
+                ShoppingCartId = cart.Id,
                 Discount = discount,
-                ShoppingCart = shoppingCart
+                ShoppingCart = cart
             };
 
             _context.ShoppingCartDiscounts.Add(cart_discount);
+
             Save();
-            return cart_discount.ShoppingCart;
         }
 
         public void ClearShoppingCartItems(int cart_id)
@@ -134,6 +125,14 @@ namespace VeygoShoppingCart.Domain.Repository
         private void Save()
         {
             _context.SaveChanges();
+        }
+
+        public void UpdateShoppingCartTotalPrice(int cart_id)
+        {
+            var shoppingCart = _context.ShoppingCarts.FirstOrDefault(sc => sc.Id == cart_id);
+            var price = ShoppingCartCalculator.CalucalateTotalPrice(shoppingCart.CartItems.ToList(), shoppingCart.CartDiscounts.ToList());
+            shoppingCart.TotalPrice = price;
+            Save();
         }
     }
 }

@@ -10,15 +10,13 @@ namespace VeygoShoppingCart.API.Helpers
     {
         public static ShoppingCartDTO MapCartDomainCartToDTO(ShoppingCart cart, IMapper mapper)
         {
-            var mapped_cart = new ShoppingCartDTO();
-            mapped_cart.CartId = cart.Id;
-
-            mapped_cart.Discounts = new List<CartDiscountDTO>() { };
-            mapped_cart.Items = new List<CartItemDTO>() { };
-
-            mapped_cart.Discounts = mapper.Map<ICollection<CartDiscountDTO>>(cart.CartDiscounts);
-            mapped_cart.Items = mapper.Map<ICollection<CartItemDTO>>(cart.CartItems);
-
+            var mapped_cart = new ShoppingCartDTO
+            {
+                CartId = cart.Id,
+                Discounts = mapper.Map<ICollection<CartDiscountDTO>>(cart.CartDiscounts),
+                Items = mapper.Map<ICollection<CartItemDTO>>(cart.CartItems),
+                TotalPrice = cart.TotalPrice
+            };
 
             for (int i = 0; i < mapped_cart.Items.Count(); i++)
             {

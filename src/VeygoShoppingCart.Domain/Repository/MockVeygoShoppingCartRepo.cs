@@ -22,7 +22,7 @@ namespace VeygoShoppingCart.Domain.Repository
             throw new NotImplementedException();
         }
 
-        public ShoppingCart AddShoppingCartDiscount(int cart_id, string code)
+        public void AddShoppingCartDiscount(ShoppingCart cart, Discount discount)
         {
             throw new NotImplementedException();
         }
@@ -106,6 +106,11 @@ namespace VeygoShoppingCart.Domain.Repository
         }
 
         public Item GetItemById(int item_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateShoppingCartTotalPrice(int cart_id)
         {
             throw new NotImplementedException();
         }
