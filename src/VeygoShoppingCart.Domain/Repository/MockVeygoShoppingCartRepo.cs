@@ -17,50 +17,26 @@ namespace VeygoShoppingCart.Domain.Repository
             CreateShoppingCarts();
         }
 
-        public ShoppingCart AddItemToShoppingCart(int cart_id, int item_id)
+        public void IncreaseShoppingCartItemQuantity(int cart_id, int item_id)
         {
             throw new NotImplementedException();
         }
 
-        public ShoppingCart AddShoppingCartDiscount(int cart_id, string code)
+        public void AddShoppingCartDiscount(ShoppingCart cart, Discount discount)
         {
             throw new NotImplementedException();
         }
 
-        public int CreateShoppingCart()
+        public ShoppingCart CreateShoppingCart()
         {
             throw new NotImplementedException();
         }
 
-        public Item GetAllItems()
-        {
-            throw new NotImplementedException();
-        }
 
         public Discount GetDiscountById(int id)
         {
             var discount = _discounts.FirstOrDefault(x => x.Id == id);
             return discount;
-        }
-
-        public IEnumerable<Discount> GetDiscounts()
-        {
-            return _discounts;
-        }
-
-        public IEnumerable<Item> GetItems()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ShoppingCart RemoveShoppingCartDiscount(int cart_id, string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ShoppingCart UpdateShoppingCartItemQuantity(int cart_id, int item_id)
-        {
-            throw new NotImplementedException();
         }
 
         private void CreateDiscounts()
@@ -75,12 +51,12 @@ namespace VeygoShoppingCart.Domain.Repository
 
         private void CreateShoppingCartItems()
         {
-
+            throw new NotImplementedException();
         }
 
         private void CreateShoppingCartDiscounts()
         {
-
+            throw new NotImplementedException();
         }
 
 
@@ -92,6 +68,51 @@ namespace VeygoShoppingCart.Domain.Repository
                 new ShoppingCart{ Id = 2, TotalPrice = 0.00M, Complete = false },
                 new ShoppingCart{ Id = 3, TotalPrice = 0.00M, Complete = false }
             };
+        }
+
+        public IEnumerable<Item> GetAllItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Discount> GetAllDiscounts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DiscountExistsInShoppingCart(int cart_id, string discount_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ShoppingCart GetShoppingCartById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Discount GetDiscountByCode(string discount_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearShoppingCartItems(int cart_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReduceShoppingCartItemQuantity(int cart_id, int item_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Item GetItemById(int item_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateShoppingCartTotalPrice(int cart_id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

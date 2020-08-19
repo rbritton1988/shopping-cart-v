@@ -5,7 +5,7 @@ namespace VeygoShoppingCart.Tests
 {
     public class Tests
     {
-        private MockVeygoShoppingCartRepo _repo;
+        private IVeygoShoppingCartRepo _repo;
         
         [SetUp]
         public void Setup()
