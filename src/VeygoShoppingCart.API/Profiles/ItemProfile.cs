@@ -9,6 +9,7 @@ namespace VeygoShoppingCart.API.Profiles
         public ItemProfile()
         {
             CreateMap<Item, CartItemsCreateDTO>();
+            CreateMap<Item, ItemsReadDTO>();
         }
     }
 }

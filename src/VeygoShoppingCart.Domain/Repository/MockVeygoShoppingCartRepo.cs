@@ -17,7 +17,7 @@ namespace VeygoShoppingCart.Domain.Repository
             CreateShoppingCarts();
         }
 
-        public ShoppingCart AddItemToShoppingCart(int cart_id, int item_id)
+        public void AddItemToShoppingCart(int cart_id, int item_id)
         {
             throw new NotImplementedException();
         }
@@ -127,6 +127,21 @@ namespace VeygoShoppingCart.Domain.Repository
         }
 
         public CartDiscount GetCartDiscountById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Item> GetItemsByCartId(int cart_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearCartItems(int cart_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReduceCartItemQuantity(int cart_id, int item_id)
         {
             throw new NotImplementedException();
         }
