@@ -14,7 +14,7 @@ namespace VeygoShoppingCart.Domain.Repository
             _context = context;
         }
 
-        public void AddItemToShoppingCart(int cart_id, int item_id)
+        public void IncreaseShoppingCartItemQuantity(int cart_id, int item_id)
         {
             var existing_item = _context.ShoppingCartItems.FirstOrDefault(si => si.ShoppingCartId == cart_id && si.ItemId == item_id);
 
@@ -42,6 +42,25 @@ namespace VeygoShoppingCart.Domain.Repository
             }
         }
 
+        public void ReduceShoppingCartItemQuantity(int cart_id, int item_id)
+        {
+            var cart_item = _context.ShoppingCartItems.FirstOrDefault(si => si.ShoppingCartId == cart_id && si.ItemId == item_id);
+            if (cart_item == null) return;
+
+            cart_item.Quantity -= 1;
+
+            if (cart_item.Quantity <= 0)
+            {
+                _context.ShoppingCartItems.Remove(cart_item);
+            }
+            else
+            {
+                _context.ShoppingCartItems.Update(cart_item);
+            }
+
+            Save();
+        }
+
         public ShoppingCart AddShoppingCartDiscount(int cart_id, string code)
         {
             bool discount_exists = DiscountExistsInShoppingCart(cart_id, code);
@@ -49,13 +68,23 @@ namespace VeygoShoppingCart.Domain.Repository
             {
                 throw new ArgumentException("Discount already applied to that cart");
             }
-            var cart_discount = new CartDiscount { DiscountId = 1, ShoppingCartId = cart_id };
+
+            var discount = GetDiscountByCode(code);
+            var shoppingCart = GetShoppingCartById(cart_id);
+
+            var cart_discount = new CartDiscount { 
+                DiscountId = discount.Id, 
+                ShoppingCartId = cart_id,
+                Discount = discount,
+                ShoppingCart = shoppingCart
+            };
+
             _context.ShoppingCartDiscounts.Add(cart_discount);
             Save();
             return cart_discount.ShoppingCart;
         }
 
-        public void ClearCartItems(int cart_id)
+        public void ClearShoppingCartItems(int cart_id)
         {
             var cart_items = _context.ShoppingCartItems.Where(si => si.ShoppingCartId == cart_id).ToList();
             _context.ShoppingCartItems.RemoveRange(cart_items);
@@ -87,100 +116,24 @@ namespace VeygoShoppingCart.Domain.Repository
             return _context.Items;
         }
 
-        public CartDiscount GetCartDiscountById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CartDiscount> GetCartDiscountsByCartId(int cart_id)
-        {
-            return _context.ShoppingCartDiscounts.Where(sd => sd.ShoppingCartId == cart_id);
-        }
-
-        public CartItem GetCartItemById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CartItem> GetCartItemsByCartId(int cart_id)
-        {
-            return _context.ShoppingCartItems.Where(si => si.ShoppingCartId == cart_id);
-        }
-
         public Discount GetDiscountByCode(string discount_code)
         {
-            throw new NotImplementedException();
-        }
-
-        public Discount GetDiscountById(int id)
-        {
-            return _context.Discounts.Where(i => i.Id == id).FirstOrDefault();
-        }
-
-        public Item GetItemById(int item_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Item> GetItemsByCartId(int cart_id)
-        {
-            var items = new List<Item>() { };
-            _context.ShoppingCartItems.Where(si => si.ShoppingCartId == cart_id)?.ToList().ForEach(ci =>
-            {
-                items.Append(_context.Items.FirstOrDefault(i => i.Id == ci.ItemId));
-            });
-
-            return items;
+            return _context.Discounts.FirstOrDefault(d => d.Code == discount_code);
         }
 
         public ShoppingCart GetShoppingCartById(int id)
         {
-            var cart = _context.ShoppingCarts.FirstOrDefault(sc => sc.Id == id);
-
-            var c = new ShoppingCart
-            {
-                Id = cart.Id,
-                CartDiscounts = cart.CartDiscounts.ToList(),
-                CartItems = cart.CartItems.ToList(),
-                Complete = cart.Complete
-            };
-
-            return c;
+            return _context.ShoppingCarts.FirstOrDefault(sc => sc.Id == id);
         }
 
-        public void ReduceCartItemQuantity(int cart_id, int item_id)
+        public Item GetItemById(int item_id)
         {
-            var cart_item = _context.ShoppingCartItems.FirstOrDefault(si => si.ShoppingCartId == cart_id && si.ItemId == item_id);
-            if (cart_item == null) return;
-
-            cart_item.Quantity -= 1;
-
-            if (cart_item.Quantity <= 0)
-            {
-                _context.ShoppingCartItems.Remove(cart_item);
-            }
-            else
-            {
-                _context.ShoppingCartItems.Update(cart_item);
-            }
-
-            Save();
-        }
-
-        public ShoppingCart RemoveShoppingCartDiscount(int cart_id, string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ShoppingCart UpdateShoppingCartItemQuantity(int cart_id, int item_id)
-        {
-            throw new NotImplementedException();
+            return _context.Items.FirstOrDefault(i => i.Id == item_id);
         }
 
         private void Save()
         {
             _context.SaveChanges();
         }
-
     }
 }

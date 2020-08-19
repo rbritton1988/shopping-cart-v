@@ -8,8 +8,7 @@ namespace VeygoShoppingCart.API.Profiles
     {
         public DiscountProfile()
         {
-            CreateMap<Discount, DiscountsCreateDTO>();
-            CreateMap<Discount, DiscountsReadDTO>();
+            CreateMap<Discount, DiscountDTO>();
         }
     }
 }

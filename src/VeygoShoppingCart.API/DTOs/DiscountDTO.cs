@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VeygoShoppingCart.API.DTOs
 {
-    public class DiscountsReadDTO
+    public class DiscountDTO
     {
         public string Code { get; set; }
         public double Percentage { get; set; }

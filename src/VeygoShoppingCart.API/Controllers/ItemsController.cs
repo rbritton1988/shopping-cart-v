@@ -21,11 +21,11 @@ namespace VeygoShoppingCart.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ItemsReadDTO>> GetAllItems()
+        public ActionResult<IEnumerable<ItemDTO>> GetAllItems()
         {
             var items = _repo.GetAllItems();
 
-            var mapped_items = _mapper.Map<IEnumerable<ItemsReadDTO>>(items);
+            var mapped_items = _mapper.Map<IEnumerable<ItemDTO>>(items);
 
             return Ok(mapped_items);
         }

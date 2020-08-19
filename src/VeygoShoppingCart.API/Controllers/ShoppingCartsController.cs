@@ -43,7 +43,7 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpPost("{cart_id}/items/{item_id}")]
         public ActionResult<ShoppingCartDTO> AddItemToShoppingCart(int cart_id, int item_id)
         {
-            _repo.AddItemToShoppingCart(cart_id, item_id);
+            _repo.IncreaseShoppingCartItemQuantity(cart_id, item_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
@@ -54,7 +54,7 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpDelete("{cart_id}/items/{item_id}")]
         public ActionResult<ShoppingCartDTO> RemoveItemFromShoppingCart(int cart_id, int item_id)
         {
-            _repo.ReduceCartItemQuantity(cart_id, item_id);
+            _repo.ReduceShoppingCartItemQuantity(cart_id, item_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);
@@ -65,7 +65,7 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpDelete("{cart_id}/items")]
         public ActionResult<ShoppingCartDTO> ClearShoppingCartItems(int cart_id)
         {
-            _repo.ClearCartItems(cart_id);
+            _repo.ClearShoppingCartItems(cart_id);
 
             var cart = _repo.GetShoppingCartById(cart_id);
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(cart, _mapper);

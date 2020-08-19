@@ -17,7 +17,7 @@ namespace VeygoShoppingCart.Domain.Repository
             CreateShoppingCarts();
         }
 
-        public void AddItemToShoppingCart(int cart_id, int item_id)
+        public void IncreaseShoppingCartItemQuantity(int cart_id, int item_id)
         {
             throw new NotImplementedException();
         }
@@ -37,17 +37,6 @@ namespace VeygoShoppingCart.Domain.Repository
         {
             var discount = _discounts.FirstOrDefault(x => x.Id == id);
             return discount;
-        }
-
-
-        public ShoppingCart RemoveShoppingCartDiscount(int cart_id, string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ShoppingCart UpdateShoppingCartItemQuantity(int cart_id, int item_id)
-        {
-            throw new NotImplementedException();
         }
 
         private void CreateDiscounts()
@@ -101,47 +90,22 @@ namespace VeygoShoppingCart.Domain.Repository
             throw new NotImplementedException();
         }
 
-        public Item GetItemById(int item_id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Discount GetDiscountByCode(string discount_code)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CartItem> GetCartItemsByCartId(int cart_id)
+        public void ClearShoppingCartItems(int cart_id)
         {
             throw new NotImplementedException();
         }
 
-        public CartItem GetCartItemById(int id)
+        public void ReduceShoppingCartItemQuantity(int cart_id, int item_id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CartDiscount> GetCartDiscountsByCartId(int cart_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CartDiscount GetCartDiscountById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Item> GetItemsByCartId(int cart_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClearCartItems(int cart_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReduceCartItemQuantity(int cart_id, int item_id)
+        public Item GetItemById(int item_id)
         {
             throw new NotImplementedException();
         }

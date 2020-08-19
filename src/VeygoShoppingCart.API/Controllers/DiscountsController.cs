@@ -22,11 +22,11 @@ namespace VeygoShoppingCart.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<DiscountsReadDTO>> GetAllDiscounts()
+        public ActionResult<IEnumerable<DiscountDTO>> GetAllDiscounts()
         {
             var discounts = _repo.GetAllDiscounts();
 
-            var mapped_discounts = _mapper.Map<IEnumerable<DiscountsReadDTO>>(discounts);
+            var mapped_discounts = _mapper.Map<IEnumerable<DiscountDTO>>(discounts);
 
             return Ok(mapped_discounts);
         }
