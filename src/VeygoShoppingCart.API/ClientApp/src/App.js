@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-
+import React from "react";
+import ShoppingCart from "./containers/ShoppingCart";
 
 function App() {
-    return (
-    <div className="App">
+  return (
+    <div className="container-fluid">
+      <ShoppingCart />
     </div>
   );
 }
