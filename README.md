@@ -22,8 +22,18 @@ dotnet ef database update
 
 ## Runing the project
 
+From Visual Studio: target VeygoShaoppingCart.API project and run that.
+
 From the command line (within src/)
 
 ```
 dotnet run --project VeygoShaoppingCart.API/
 ```
+Follow the url presented in command line.
+
+- If something goes wrong, You may have to manually install the frontend dependencies by running `yarn` in `VeygoShaoppingCart.API/ClientApp/` directory.
+
+### Discount Codes
+- VC08A9VSK7
+- VC08AURX7G
+- FIRST15UK
