@@ -81,59 +81,30 @@ namespace VeygoShoppingCart.Domain.Repository
         }
 
         public bool DiscountExistsInShoppingCart(int cart_id, string discount_code)
-<<<<<<< HEAD
         {
             throw new NotImplementedException();
         }
 
         public ShoppingCart GetShoppingCartById(int id)
-=======
->>>>>>> develop
         {
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
         public Discount GetDiscountByCode(string discount_code)
-=======
-        public ShoppingCart GetShoppingCartById(int id)
->>>>>>> develop
         {
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
         public void ClearShoppingCartItems(int cart_id)
-=======
-        public Discount GetDiscountByCode(string discount_code)
->>>>>>> develop
         {
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
         public void ReduceShoppingCartItemQuantity(int cart_id, int item_id)
-=======
-        public void ClearShoppingCartItems(int cart_id)
->>>>>>> develop
         {
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
-        public Item GetItemById(int item_id)
-=======
-        public void ReduceShoppingCartItemQuantity(int cart_id, int item_id)
->>>>>>> develop
-        {
-            throw new NotImplementedException();
-        }
-
-<<<<<<< HEAD
-        public void UpdateShoppingCartTotalPrice(int cart_id)
-        {
-            throw new NotImplementedException();
-=======
         public Item GetItemById(int item_id)
         {
             throw new NotImplementedException();
@@ -147,7 +118,6 @@ namespace VeygoShoppingCart.Domain.Repository
         public void CheckoutShoppingCart(ShoppingCart cart)
         {
             throw new NotImplementedException();
->>>>>>> develop
         }
     }
 }

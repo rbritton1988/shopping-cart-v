@@ -134,8 +134,6 @@ namespace VeygoShoppingCart.Domain.Repository
             shoppingCart.TotalPrice = price;
             Save();
         }
-<<<<<<< HEAD
-=======
 
         public void CheckoutShoppingCart(ShoppingCart cart)
         {
@@ -143,6 +141,5 @@ namespace VeygoShoppingCart.Domain.Repository
             _context.ShoppingCarts.Update(cart);
             Save();
         }
->>>>>>> develop
     }
 }

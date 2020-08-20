@@ -98,10 +98,6 @@ namespace VeygoShoppingCart.API.Controllers
         [HttpPost("{cart_id}/checkout")]
         public ActionResult<ShoppingCartDTO> CheckoutShoppingCart(int cart_id)
         {
-<<<<<<< HEAD
-            // Set cart to complete.
-            return Ok(new ShoppingCartDTO());
-=======
             var shoppingCart = _repo.GetShoppingCartById(cart_id);
 
             _repo.CheckoutShoppingCart(shoppingCart);
@@ -109,7 +105,6 @@ namespace VeygoShoppingCart.API.Controllers
             var mapped_cart = ShoppingCartMapper.MapCartDomainCartToDTO(shoppingCart, _mapper);
 
             return Ok(mapped_cart);
->>>>>>> develop
         }
     }
 }
