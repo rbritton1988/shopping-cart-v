@@ -114,5 +114,10 @@ namespace VeygoShoppingCart.Domain.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void CheckoutShoppingCart(ShoppingCart cart)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

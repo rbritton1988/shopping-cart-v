@@ -134,5 +134,12 @@ namespace VeygoShoppingCart.Domain.Repository
             shoppingCart.TotalPrice = price;
             Save();
         }
+
+        public void CheckoutShoppingCart(ShoppingCart cart)
+        {
+            cart.Complete = true;
+            _context.ShoppingCarts.Update(cart);
+            Save();
+        }
     }
 }
