@@ -18,5 +18,6 @@ namespace VeygoShoppingCart.Domain.Repository
         public ShoppingCart GetShoppingCartById(int id);        
         public void AddShoppingCartDiscount(ShoppingCart cart, Discount discount);
         public void UpdateShoppingCartTotalPrice(int cart_id);
+        public void CheckoutShoppingCart(ShoppingCart cart);
     }
 }

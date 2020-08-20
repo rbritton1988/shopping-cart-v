@@ -3,7 +3,8 @@ import CartItem from "../components/CartItem";
 import CartSideBar from "../components/CartSideBar";
 import axios from "axios";
 import Product from "../components/Product";
-
+import Receipt from "../components/Receipt";
+import $ from 'jquery';
 
 class ShoppingCart extends Component {
   state = {
@@ -14,6 +15,7 @@ class ShoppingCart extends Component {
       totalPrice: 0.0,
     },
     products: [],
+    cartComplete: false,
     loading: false,
     error: null,
   };
@@ -48,38 +50,58 @@ class ShoppingCart extends Component {
   }
 
   itemQtyDecreasedHandler = (item_id) => {
-    axios
-      .delete(
-        `api/shopping-carts/${this.state.shoppingCart.cartId}/items/${item_id}`
-      )
+    axios.delete(`api/shopping-carts/${this.state.shoppingCart.cartId}/items/${item_id}`)
       .then((res) => {
         this.setState({ shoppingCart: res.data });
       });
   };
 
   itemQtyIncreasedHandler = (item_id) => {
-    axios
-      .post(
-        `api/shopping-carts/${this.state.shoppingCart.cartId}/items/${item_id}`
-      )
+    axios.post(`api/shopping-carts/${this.state.shoppingCart.cartId}/items/${item_id}`)
       .then((res) => {
         this.setState({ shoppingCart: res.data });
       });
   };
 
   cartItemsClearedHandler = () => {
-    axios
-    .delete(
-      `api/shopping-carts/${this.state.shoppingCart.cartId}/items`
-    )
-    .then((res) => {
-      this.setState({ shoppingCart: res.data });
-    });
+    axios.delete(`api/shopping-carts/${this.state.shoppingCart.cartId}/items`)
+      .then((res) => {
+        this.setState({ shoppingCart: res.data });
+      });
   }
+
+  discountAppliedHandler = (discount_code) => {
+    axios.post(`api/shopping-carts/${this.state.shoppingCart.cartId}/discounts/${discount_code}`)
+      .then((res) => {
+        this.setState({ shoppingCart: res.data });
+      });
+  }
+
+  cartCheckedOutHandler = () => {
+    axios.post(`api/shopping-carts/${this.state.shoppingCart.cartId}/checkout`)
+      .then((res) => {
+        this.setState({ shoppingCart: res.data, cartComplete: true });
+
+        // Display the Receipt
+        $('#staticBackdrop').modal('show');
+      });
+  }
+
+  receiptClosedHandler = () => {
+    localStorage.removeItem("cart-id");
+    window.location.reload(false);
+  }
+
+
 
   render() {
     return (
       <>
+        <Receipt 
+          closed={this.receiptClosedHandler}
+          order={this.state.shoppingCart} 
+        />
+
         <div className="row">
           <div className="col-md-9">
             {this.state.shoppingCart.items.map((item) => (
@@ -94,9 +116,11 @@ class ShoppingCart extends Component {
 
           <div className="col-md-3">
             <CartSideBar
+              discountApplied={this.discountAppliedHandler}
               totalPrice={this.state.shoppingCart.totalPrice}
               discounts={this.state.shoppingCart.discounts}
               cartItemsCleared={this.cartItemsClearedHandler}
+              cartCheckedOut={this.cartCheckedOutHandler}
             />
           </div>
         </div>
